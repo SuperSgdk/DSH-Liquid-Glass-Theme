@@ -1,0 +1,3 @@
+# esbuild's install step verifies/selects its platform-specific binary.
+allowBuilds:
+  esbuild: true

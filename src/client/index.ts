@@ -9,7 +9,10 @@
  * One click on the master switch returns the stock UI (every layer is an
  * effect, disposed on flip).
  */
-import type { ClientContext } from '@deepseek-ai/dsh-client-runtime/client'
+// Type-only: the client context is cordis' own Context (the `ClientContext`
+// alias died with `@deepseek-ai/dsh-client-runtime`, harness be531688f3).
+import type { Context as ClientContext } from '@deepseek-ai/cordis'
+import type {} from '@deepseek-ai/dsh-client-ui-renderer/client'
 import type { BoundActions } from '@deepseek-ai/dsh-client-ui-slots'
 // Type-only: pulls the `settings.plugin.item` SlotMap merge.
 import type {} from '@deepseek-ai/dsh-client-ui-settings-plugins/client'
@@ -20,6 +23,7 @@ import { AquaAppearanceRow, type AquaAppearanceRowInjected } from './AquaAppeara
 import { createAquaRowStore, type AquaSettingsPayload } from './settings-store.ts'
 import { en, NS, zh } from './locales.ts'
 import { AquaLayer } from './theme-layer.ts'
+import { AQUA_SETTINGS_NAMESPACE } from '../settings-namespace.ts'
 // Side-effect imports: the theme-layer stylesheet (unloaded with the plugin)
 // and the self-hosted Space Grotesk @font-face (no shell dependency).
 import './aqua.module.css'
@@ -173,8 +177,11 @@ export function apply(ctx: ClientContext): void {
   // Master switch card in the Plugins configurable tab.
   ctx.slots.inject('settings.plugin.item', () => ctx.slots.register({
     name: 'settings.plugin.item',
-    id: 'aqua',
-    order: 5,
+    // settings.plugin.item is a KEYED slot: it requires options.key (registering
+    // without one throws `keyed slot "settings.plugin.item" requires options.key`
+    // during load) and its cell IS the key, so it takes no `id` and — since
+    // 0.1.5 — no `order` either (order belongs to list slots only).
+    key: AQUA_SETTINGS_NAMESPACE,
     store: pluginStore,
     locale: NS,
     inject: pluginInjected,

@@ -1,10 +1,10 @@
 /**
- * Package-owned invariant companion for `@deepseek-ai/dsh-client-ui-aqua`.
- * @module @deepseek-ai/dsh-client-ui-aqua/invariant
+ * Package-owned invariant companion for `dsh-liquid-glass-theme`.
+ * @module dsh-liquid-glass-theme/invariant
  */
 import type { Context } from '@deepseek-ai/cordis';
 /** Cordis companion plugin name. */
-export declare const name = "client-ui-aqua-invariant";
+export declare const name = "liquid-glass-theme-invariant";
 /** Service required before the companion can reserve package ownership. */
 export declare const inject: string[];
 /**
@@ -13,4 +13,3 @@ export declare const inject: string[];
  * @returns the installed registration's disposer after setup succeeds.
  */
 export declare const apply: (ctx: Context) => Promise<() => void>;
-//# sourceMappingURL=invariant.d.ts.map

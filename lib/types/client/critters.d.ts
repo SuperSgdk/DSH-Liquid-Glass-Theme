@@ -15,4 +15,7 @@ export declare const AMBIENT_SCENE: string;
 export declare function ensureAmbientScene(): HTMLElement;
 /** Remove the ambient container wherever it lives. */
 export declare function removeAmbientScene(): void;
-//# sourceMappingURL=critters.d.ts.map
+/** Add the page edge-fade bands (5px gradient blur over the chat content). */
+export declare function ensurePageFades(): void;
+/** Remove the edge-fade bands. */
+export declare function removePageFades(): void;

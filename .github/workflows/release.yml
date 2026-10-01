@@ -12,11 +12,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run check
+      - name: Check tag matches package version
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: node --input-type=module -e 'import fs from "node:fs"; const pkg = JSON.parse(fs.readFileSync("package.json", "utf8")); if (process.env.RELEASE_TAG !== `v${pkg.version}`) throw new Error("Tag does not match package version");'
+      - run: pnpm pack
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          name: ${{ github.ref_name }}
+          name: DSH液态玻璃皮肤插件 ${{ github.ref_name }}
           generate_release_notes: true
+          fail_on_unmatched_files: true
           files: |
-            lib/client.js
+            dsh-liquid-glass-theme-*.tgz
             install.ps1

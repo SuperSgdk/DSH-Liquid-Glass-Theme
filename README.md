@@ -1,74 +1,79 @@
-# @deepseek-ai/dsh-client-ui-aqua
+# DSH液态玻璃皮肤插件
 
-English | [中文](README.zh.md)
+由 **SuperSgdk** 独立维护的 DSH 界面主题。让顶栏、侧边栏、输入区和统计栏使用可调的玻璃材质，支持流体背景、图片/视频壁纸及明暗主题。
 
-# Notice ⚠️: As DSH has been updated, I am unable to promptly update the plugin with the new APIdue to my academic commitments. Please use an alternative agent to replace or repair it yourself to avoid crashes when installing this plugin.
+在设置里关闭插件，可恢复原生界面。主题不修改 DSH 源码，也不参与模型调用或消息发送。
 
+![DSH液态玻璃皮肤插件实际运行效果](docs/images/web-light.png)
 
-Aqua is a highly customizable glassmorphism theme for the DeepSeek Harness web UI. The header, sidebar, composer, stats line, and trajectory view all become panes of frosted glass. you can put video for wallpaper and Switch it off and the stock UI comes back exactly, with no source changes to DSH itself.
+## 兼容范围
 
-![](assets/1.png)
+| 环境 | 状态 |
+| --- | --- |
+| Windows + DSH Web `0.1.5-rc.1` | 已通过运行、设置与开关验证，见 [验证记录](docs/VALIDATION.md) |
+| DSH `0.1.6` | 社区修复提供参考，维护版尚未实测 |
+| DSH `0.2.0` / 桌面端 | 待验证，见 [桌面端适配清单](docs/DESKTOP.md) |
 
-![](assets/2.png)
+仓库名中的 Theme 表示界面主题；包名 `dsh-liquid-glass-theme` 没有限定桌面端。桌面端兼容性将以实际验证结果更新。
 
-![](assets/3.png)
+## Windows 安装
 
-![](assets/4.png)
-
-## Features
-
-- **Two modes**: **Mica** restyles the layout into floating glass cards (blur and frost adjustable), while **Compatibility Mode** keeps the stock layout byte-for-byte and only swaps the material to generic glass — other plugins' UI gets the same treatment automatically
-- **Free backdrop**: a living fluid board (hue adjustable) or your own wallpaper (fills the page, aspect preserved, with its own blur and frost); light wallpapers look best in light mode, dark wallpapers in dark mode
-- **Background brightness**: follows the resolved scheme — dark mode darkens (0–50), light mode brightens (50–100), 50 is unchanged
-- **Particle whale**: the deepseek.com/harness centerpiece fish (a 2D port of the site's particle engine), centered in the chat area right of the sidebar — white particles on dark, gray on light, toggleable in settings
-- **Glossy "Harness" badge**: in dark mode the sidebar wordmark wears the official nameplate pill (135° gradient ring + soft glow); light mode keeps the stock plate
-- **Edge fades**: 5px gradient blur bands pinned to the top and bottom of the page, above the chat content — scrolling content melts into the edges; faint white veil on light, faint black on dark
-- One switch: off restores the stock UI exactly, and every effect is removed with the plugin
-
-## Installation
-
-### Option 1: npm one-liner (recommended)
-
-```sh
-dsh plugin --profile web add dsh-client-ui-aqua
-```
-
-Installs the latest version from npm and registers it as a profile plugin layer (`dsh.bundle` patch) — works on every platform. Reload the web UI and it is on.
-
-### Option 2: GitHub installer (fallback)
-
-No npm account and no git needed (falls back to a plain zip download).
-
-**Windows (one command):**
+先初始化要使用的 DSH profile，再退出该 profile 对应的 DSH 进程。下载本项目安装脚本：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -Command "Invoke-WebRequest 'https://github.com/WYH66666666/DSH-Transparent-UI-Plugin/raw/main/install.ps1' -OutFile install.ps1; .\install.ps1"
+Invoke-WebRequest 'https://raw.githubusercontent.com/SuperSgdk/DSH-Liquid-Glass-Theme/main/install.ps1' -OutFile install-liquid-glass.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install-liquid-glass.ps1
 ```
 
-Installs the **latest release** by default. The script links the plugin into the profile's `node_modules` and registers `ui-aqua` in `cordis.patch.yml` (idempotent — safe to run again).
-
-Pin a version or track the dev branch:
+默认安装最新 GitHub Release 到 `web` profile。也可以指定版本和 profile：
 
 ```powershell
-.\install.ps1 -Version 'v1.1.0'   # a specific release
-.\install.ps1 -Version 'main'     # the development branch
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install-liquid-glass.ps1 -Version v1.4.0 -Profile web
 ```
 
-**macOS / Linux (manual, three steps):**
+安装脚本会先备份该 profile 的 `cordis.patch.yml`、`package.json` 和原链接信息，然后在 **该 profile 自己的 node_modules** 建立链接。备份位置会打印出来。
 
-```sh
-git clone --depth 1 --branch v1.1.0 https://github.com/WYH66666666/DSH-Transparent-UI-Plugin.git
-ln -s "$PWD/DSH" "$DSH_HOME/profiles/node_modules/@deepseek-ai/dsh-client-ui-aqua"
+重新启动 DSH，在 **设置 → 插件** 查找“DSH液态玻璃皮肤插件”；模糊度、磨砂度和壁纸等调节项位于 **设置 → 通用设置 → 外观** 下方。
+
+首次维护版通过 GitHub Release 分发，尚未发布到 npm。
+
+## 从旧 Aqua 迁移
+
+同一个 profile 中只启用一个版本。安装脚本会把旧的 `@deepseek-ai/dsh-client-ui-aqua` 注册及 manifest 依赖迁移到新包名，保留其他插件和注释；原源码目录与旧链接目标不会被删除。
+
+浏览器偏好的 `dsh.ui-aqua.*` 键及原媒体数据库继续保留，以便在同一浏览器、同一站点使用原来的设置。不同端口、浏览器和桌面端的存储各自独立，不会自动同步壁纸。
+
+若需要恢复，先退出 DSH，将安装时打印的备份目录中的两个配置文件复制回 profile，再按 `link.json` 恢复原来的插件链接。新建链接此前没有目标时，可移除该 Junction；只处理链接本身。
+
+## 本地开发
+
+需要 Node.js 22 或更新版本及 pnpm 11.19.0。构建在本仓库内完成，不需要 DSH 源码工作区或原作者的磁盘路径。
+
+```powershell
+pnpm install --frozen-lockfile
+pnpm run check
 ```
 
-then append to `$DSH_HOME/profiles/web/cordis.patch.yml`:
+`check` 依次进行类型检查、构建和回归检查。浏览器 bundle 使用 DSH 的模块加载器，CSS 和 CSS Modules 随 bundle 注入；`lib` 中的构建产物随版本提交，普通安装无需构建。
 
-```yaml
-- insert:
-    - id: ui-aqua
-      name: '@deepseek-ai/dsh-client-ui-aqua'
+运行 `pnpm pack` 可生成完整 `.tgz` 包；Windows 也可运行 `./pack.ps1`，它先检查再打包。GitHub Release 流程会检查版本号、构建并上传包和安装脚本。
+
+本地副本安装到已初始化的测试 profile：
+
+```powershell
+.\install.ps1 -Source $PWD.Path -DshHome '<测试 DSH_HOME>' -Profile '<测试 profile>'
 ```
 
-## Usage
+浏览器检查需单独启动测试 profile，将带启动 token 的测试 URL 放入当前终端的 `DSH_TEST_URL` 环境变量，再运行 `node scripts/browser-smoke.mjs`。测试 URL 和 token 不应写入提交。使用已有 Chrome 时设置 `BROWSER_CHANNEL=chrome`，否则按 Playwright 的说明安装测试浏览器。
 
-Reload the web UI. Aqua is **on by default**; the master switch lives in **Settings → Plugins → Glass theme** (same shape as the other plugin cards), and every other control sits directly under **Settings → General → Appearance** (no title of its own): mode, blur/frost (Mica mode), fluid color, background brightness, backdrop (fluid/wallpaper) with its wallpaper controls, and the particle-whale toggle. With the master switch off, the whole control block under Appearance is hidden.
+## 维护与贡献
+
+问题和新 PR 请提交到本仓库。兼容修复应写明 DSH 版本、复现步骤和验证结果；不同修复存在重叠时逐项取舍。
+
+- [已有社区 PR 的评审结果](docs/PR_REVIEW.md)
+- [验证记录](docs/VALIDATION.md)
+- [更新日志](CHANGELOG.md)
+
+## 许可证与贡献记录
+
+本项目代码以 **AGPL-3.0-only** 分发，保留 [LICENSE](LICENSE) 全文。内嵌 Space Grotesk 字体遵循 [SIL OFL 1.1](licenses/SpaceGrotesk-OFL.txt)。继承代码、资源的作者及社区贡献记录见 [NOTICE](NOTICE)，原有提交历史保留。项目维护、安装与版本发布入口均为本仓库。
