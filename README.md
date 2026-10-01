@@ -28,7 +28,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install-liquid-glass.ps1
 默认安装最新 GitHub Release 到 `web` profile。也可以指定版本和 profile：
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\install-liquid-glass.ps1 -Version v1.4.0 -Profile web
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install-liquid-glass.ps1 -Version v1.4.1 -Profile web
 ```
 
 安装脚本会先备份该 profile 的 `cordis.patch.yml`、`package.json` 和原链接信息，然后在 **该 profile 自己的 node_modules** 建立链接。备份位置会打印出来。

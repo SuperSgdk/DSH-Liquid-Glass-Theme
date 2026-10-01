@@ -14,10 +14,10 @@ test('Windows installer migrates, backs up and stays idempotent', { skip: proces
     const source = join(dir, 'source');
     await mkdir(profile, { recursive: true });
     await mkdir(join(source, 'lib'), { recursive: true });
-    await writeFile(join(source, 'package.json'), JSON.stringify({ name: 'dsh-liquid-glass-theme' }));
+    await writeFile(join(source, 'package.json'), JSON.stringify({ name: 'dsh-liquid-glass-theme', description: '液态玻璃皮肤插件：中文元数据' }));
     for (const file of ['lib/client.js', 'lib/index.js', 'LICENSE', 'NOTICE']) await writeFile(join(source, file), 'fixture');
-    const manifest = JSON.stringify({ private: true, dependencies: { unrelated: '1.0.0', '@deepseek-ai/dsh-client-ui-aqua': 'link:old' } });
-    const legacyPatch = "# Keep this comment\n- insert:\n    - id: client-ui-aqua\n      name: '@deepseek-ai/dsh-client-ui-aqua'\n";
+    const manifest = JSON.stringify({ private: true, description: '保留原配置中的中文', dependencies: { unrelated: '1.0.0', '@deepseek-ai/dsh-client-ui-aqua': 'link:old' } });
+    const legacyPatch = "# 保留这条中文注释\n- insert:\n    - id: client-ui-aqua\n      name: '@deepseek-ai/dsh-client-ui-aqua'\n";
     await writeFile(join(profile, 'package.json'), manifest);
     await writeFile(join(profile, 'cordis.patch.yml'), legacyPatch);
     const installer = fileURLToPath(new URL('../install.ps1', import.meta.url));
@@ -28,11 +28,12 @@ test('Windows installer migrates, backs up and stays idempotent', { skip: proces
     run();
     run();
     const patch = await readFile(join(profile, 'cordis.patch.yml'), 'utf8');
-    assert(patch.includes('# Keep this comment'));
+    assert(patch.includes('# 保留这条中文注释'));
     assert.equal((patch.match(/name: 'dsh-liquid-glass-theme'/g) ?? []).length, 1);
     assert(!patch.includes('@deepseek-ai/dsh-client-ui-aqua'));
     const updated = JSON.parse((await readFile(join(profile, 'package.json'), 'utf8')).replace(/^\uFEFF/, ''));
     assert.equal(updated.dependencies.unrelated, '1.0.0');
+    assert.equal(updated.description, '保留原配置中的中文');
     assert(!updated.dependencies['@deepseek-ai/dsh-client-ui-aqua']);
     assert.equal(updated.dependencies['dsh-liquid-glass-theme'], 'link:' + source.replaceAll('\\', '/'));
     assert((await readlink(join(profile, 'node_modules', 'dsh-liquid-glass-theme'))).includes('source'));

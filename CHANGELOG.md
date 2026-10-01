@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.4.1 — 2026-10-01
+
+- 修复 Windows PowerShell 5.1 对无 BOM 的 UTF-8 中文 JSON、YAML 按默认编码读取，导致安装失败或注释乱码的问题。
+- 显式使用 UTF-8 读取包元数据、profile manifest 和 patch；回归检查覆盖中文元数据、中文配置及注释的保留。
+
 ## v1.4.0 — 2026-10-01
 
 - 以“DSH液态玻璃皮肤插件”建立独立维护与发布入口，包名改为 `dsh-liquid-glass-theme`。
