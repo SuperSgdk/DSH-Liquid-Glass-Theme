@@ -1,0 +1,3 @@
+# Repository-wide review authority belongs to the owner, SuperSgdk.
+# GitHub uses the CODEOWNERS file on the PR base branch.
+* @SuperSgdk
