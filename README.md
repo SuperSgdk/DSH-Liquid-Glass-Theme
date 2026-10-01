@@ -63,6 +63,8 @@ pnpm install --frozen-lockfile
 pnpm run check
 ```
 
+Windows PowerShell 中也使用上述命令完成依赖安装、检查和构建。
+
 `check` 依次进行类型检查、构建和回归检查。浏览器 bundle 使用 DSH 的模块加载器，CSS 和 CSS Modules 随 bundle 注入；`lib` 中的构建产物随版本提交，普通安装无需构建。
 
 运行 `pnpm pack` 可生成完整 `.tgz` 包；Windows 也可运行 `./pack.ps1`，它先检查再打包。GitHub Release 流程会检查版本号、构建并上传包和安装脚本。

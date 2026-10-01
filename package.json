@@ -103,7 +103,6 @@
     "tsconfig*.json",
     "pnpm-lock.yaml",
     "pnpm-workspace.yaml",
-    "build.ps1",
     "pack.ps1",
     "install.ps1",
     "cordis.patch.yml",
