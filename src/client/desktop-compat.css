@@ -1,0 +1,124 @@
+/* Local desktop compatibility patch, SuperSgdk task, 2026-10-01.
+   Windows Desktop has a native titlebar and a changed composer dock.
+   All overrides remain inactive when the theme is disabled. */
+
+/* Desktop 0.2 adds an opaque center column around the conversation. Making
+   only the inner [data-phase] root transparent leaves this ancestor covering
+   the fluid/wallpaper in both new sessions and existing conversations.
+   Keep the native column's geometry; remove only its background while enabled.
+   The frame-scoped selector also wins if the stock layout CSS loads later. */
+html[data-windows-titlebar][data-dsh-aqua] [data-dsh-frame] > [class*='centerCol'] {
+  background: transparent;
+}
+
+/* The 0.2 right panel keeps its full-size outer node mounted while closed;
+   only the dockkit children slide away. The old glass rule adds a left edge
+   to this invisible shell, producing a line around 55% of the window. */
+html[data-windows-titlebar][data-dsh-aqua][data-dsh-float] [data-rightbar-col] [data-sidebar-right-panel]:not([data-sidebar-right-open]) {
+  border-left: 0;
+}
+
+/* The legacy [class*='panel'] rule also matches the genuine panelBody
+   wrapper. Clearing only the outer shell leaves this full-height edge visible
+   while closed. The outer panel owns the single edge when it is open. */
+html[data-windows-titlebar][data-dsh-aqua][data-dsh-float] [data-rightbar-col] [data-sidebar-right-panel] > [class*='panelBody'] {
+  border-left: 0;
+}
+
+/* On Windows the collapsed sidebar track is 0px, and its reopen/new-session
+   buttons stay fixed in the titlebar. A backdrop-filter (or a hover transform)
+   on the hidden column re-anchors those fixed buttons inside a clipped box.
+   Restore an undecorated 0px column so the native titlebar buttons stay usable.
+   The important transform reset also clears an in-flight inline hover tilt. */
+html[data-windows-titlebar][data-dsh-aqua][data-dsh-float] [data-dsh-frame][data-sidebar-collapsed] > [class*='sidebarCol'] {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  overflow: visible;
+  transform: none !important;
+}
+
+html[data-windows-titlebar][data-dsh-aqua][data-dsh-float] [data-dsh-inputbar] {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 0;
+  padding-bottom: 0;
+}
+html[data-windows-titlebar][data-dsh-aqua][data-dsh-float] [data-dsh-inputbar] > * {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+html[data-windows-titlebar][data-dsh-aqua][data-dsh-float] [data-dsh-stats] {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+/* The native dock is a row: stats, plugin controls and the context meter
+   share its width. Stacking them and stretching the cost button added a full
+   row per item. Keep one divider and let the row wrap on small windows. */
+html[data-windows-titlebar][data-dsh-aqua][data-dsh-float] [data-dsh-inputbar] > :has(> [data-slot='conversation.composer.dock']) {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: 4px 8px;
+  padding: 4px 12px 6px;
+  border-top: 1px solid rgba(19, 45, 83, 0.18);
+}
+html[data-windows-titlebar][data-dsh-aqua][data-dsh-float] body[data-ds-dark-theme] [data-dsh-inputbar] > :has(> [data-slot='conversation.composer.dock']) {
+  border-top-color: rgba(148, 180, 220, 0.24);
+}
+html[data-windows-titlebar][data-dsh-aqua][data-dsh-float] [data-dsh-inputbar] [data-dsh-stats] {
+  width: auto;
+  max-width: 100%;
+  min-height: 22px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+html[data-windows-titlebar][data-dsh-aqua][data-dsh-float] [data-dsh-inputbar] [data-composer-stats] {
+  display: flex;
+  flex: 1 1 240px;
+}
+/* Cost-meter summary keeps its own styling and all of its text. Place it
+   after the compact controls; allow wrapping rather than truncating fees. */
+html[data-windows-titlebar][data-dsh-aqua][data-dsh-float] [data-dsh-inputbar] .cm-root {
+  display: block;
+  order: 1;
+  flex: 1 1 320px;
+  min-width: 0;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+html[data-windows-titlebar][data-dsh-aqua][data-dsh-float] [data-dsh-inputbar] .cm-stat-entry {
+  align-self: center;
+  width: auto;
+  flex: none;
+}
+html[data-windows-titlebar][data-dsh-aqua][data-dsh-float] [data-dsh-inputbar] > :has(> [data-slot='conversation.composer.dock']) > span {
+  align-self: center;
+  padding: 0;
+  flex: none;
+  margin-left: auto;
+}
+@media (max-width: 640px) {
+  html[data-windows-titlebar][data-dsh-aqua][data-dsh-float] [data-dsh-inputbar] [data-composer-stats] {
+    flex-basis: 180px;
+  }
+}
+html[data-windows-titlebar][data-dsh-aqua][data-dsh-float] [data-phase='active'] [data-conversation-scroll] {
+  margin-top: 0;
+  padding-top: 12px;
+}

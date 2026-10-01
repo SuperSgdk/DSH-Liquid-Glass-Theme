@@ -11,6 +11,7 @@
  */
 import type { Context as ClientContext } from '@deepseek-ai/cordis';
 import './aqua.module.css';
+import './desktop-compat.css';
 import './fonts.module.css';
 /** Required services: theme override stack plus the settings-card surfaces. */
 export declare const inject: string[];

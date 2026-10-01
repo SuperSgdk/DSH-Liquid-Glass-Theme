@@ -10,7 +10,7 @@
  * section is off.
  */
 import { useRef } from 'react'
-import { IconCheckOutline16 } from '@deepseek-ai/dsh-client-ui-primitives'
+import { CheckIcon as IconCheckOutline16 } from './CheckIcon.tsx'
 import type { PropsLocale, PropsRuntime, PropsStore } from '@deepseek-ai/dsh-client-ui-slots'
 // Type-only: pulls the `settings.general.item` SlotMap merge.
 import type {} from '@deepseek-ai/dsh-client-ui-settings/client'

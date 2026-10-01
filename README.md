@@ -2,6 +2,8 @@
 
 由 **SuperSgdk** 独立维护的 DSH 界面主题。让顶栏、侧边栏、输入区和统计栏使用可调的玻璃材质，支持流体背景、图片/视频壁纸及明暗主题。
 
+**v1.4.2 起已支持 DSH 桌面版。** 已在 Windows DSH `0.2.0-rc.2` 完成适配，修复主对话区背景、侧栏收起后无法展开、中间竖线和输入区占用过高的问题，见 [桌面版说明](docs/DESKTOP.md)。
+
 在设置里关闭插件，可恢复原生界面。主题不修改 DSH 源码，也不参与模型调用或消息发送。
 
 ![DSH液态玻璃皮肤插件实际运行效果](docs/images/web-light.png)
@@ -12,9 +14,10 @@
 | --- | --- |
 | Windows + DSH Web `0.1.5-rc.1` | 已通过运行、设置与开关验证，见 [验证记录](docs/VALIDATION.md) |
 | DSH `0.1.6` | 社区修复提供参考，维护版尚未实测 |
-| DSH `0.2.0` / 桌面端 | 待验证，见 [桌面端适配清单](docs/DESKTOP.md) |
+| Windows + DSH 桌面版 `0.2.0-rc.2` | 已适配，用户确认修复后正常；见 [桌面版说明](docs/DESKTOP.md) |
+| 其他 DSH 桌面版本 / 非 Windows 平台 | 尚未实测 |
 
-仓库名中的 Theme 表示界面主题；包名 `dsh-liquid-glass-theme` 没有限定桌面端。桌面端兼容性将以实际验证结果更新。
+仓库名中的 Theme 表示界面主题；同一包 `dsh-liquid-glass-theme` 支持上述已验证的 Web 和桌面环境。
 
 ## Windows 安装
 
@@ -28,12 +31,18 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install-liquid-glass.ps1
 默认安装最新 GitHub Release 到 `web` profile。也可以指定版本和 profile：
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\install-liquid-glass.ps1 -Version v1.4.1 -Profile web
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install-liquid-glass.ps1 -Version v1.4.2 -Profile web
+```
+
+桌面版使用 `desktop` profile：先正常退出 DSH 桌面版，再执行安装并重新打开应用。
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install-liquid-glass.ps1 -Version v1.4.2 -Profile desktop
 ```
 
 安装脚本会先备份该 profile 的 `cordis.patch.yml`、`package.json` 和原链接信息，然后在 **该 profile 自己的 node_modules** 建立链接。备份位置会打印出来。
 
-重新启动 DSH，在 **设置 → 插件** 查找“DSH液态玻璃皮肤插件”；模糊度、磨砂度和壁纸等调节项位于 **设置 → 通用设置 → 外观** 下方。
+重新启动 DSH，Web 版在 **设置 → 插件** 查找“DSH液态玻璃皮肤插件”；桌面版的主题开关位于 **设置 → 通用设置** 的外观附近。模糊度、磨砂度和壁纸等调节项位于 **外观** 下方。
 
 首次维护版通过 GitHub Release 分发，尚未发布到 npm。
 

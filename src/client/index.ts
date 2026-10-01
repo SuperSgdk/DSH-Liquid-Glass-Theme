@@ -27,6 +27,7 @@ import { AQUA_SETTINGS_NAMESPACE } from '../settings-namespace.ts'
 // Side-effect imports: the theme-layer stylesheet (unloaded with the plugin)
 // and the self-hosted Space Grotesk @font-face (no shell dependency).
 import './aqua.module.css'
+import './desktop-compat.css'
 import './fonts.module.css'
 
 /** Required services: theme override stack plus the settings-card surfaces. */
@@ -186,6 +187,19 @@ export function apply(ctx: ClientContext): void {
     locale: NS,
     inject: pluginInjected,
   }, AquaPluginCard))
+
+  // DSH Desktop 0.2 no longer declares the old settings.plugin.item slot.
+  // Keep the reversible skin switch beside its General appearance controls.
+  if (document.documentElement.hasAttribute('data-windows-titlebar')) {
+    ctx.slots.inject('settings.general.item', () => ctx.slots.register({
+      name: 'settings.general.item',
+      id: 'aqua-enabled',
+      order: 10.5,
+      store: pluginStore,
+      locale: NS,
+      inject: pluginInjected,
+    }, AquaPluginCard))
+  }
 
   // Glass knobs row in the General section, directly under Appearance (10).
   ctx.slots.inject('settings.general.item', () => ctx.slots.register({

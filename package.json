@@ -1,6 +1,6 @@
 {
   "name": "dsh-liquid-glass-theme",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "DSH液态玻璃皮肤插件：可调玻璃模糊、磨砂、壁纸与动态背景",
   "type": "module",
   "license": "AGPL-3.0-only",
@@ -65,7 +65,7 @@
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "^4.0.2",
-    "@deepseek-ai/dsh-settings": "0.1.5-rc.1"
+    "@deepseek-ai/dsh-settings": "0.1.5-rc.1 || 0.2.0-rc.2"
   },
   "peerDependenciesMeta": {
     "@deepseek-ai/dsh-settings": {

@@ -5,7 +5,7 @@
  * General settings' Appearance row, so the card stays the same shape as the
  * other plugin cards.
  */
-import { IconCheckOutline16 } from '@deepseek-ai/dsh-client-ui-primitives'
+import { CheckIcon as IconCheckOutline16 } from './CheckIcon.tsx'
 import type { InjectFace, PropsLocale, PropsRuntime, PropsStore } from '@deepseek-ai/dsh-client-ui-slots'
 // Type-only: pulls the `settings.plugin.item` SlotMap merge.
 import type {} from '@deepseek-ai/dsh-client-ui-settings-plugins/client'

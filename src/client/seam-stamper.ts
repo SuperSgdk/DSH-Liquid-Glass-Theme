@@ -40,8 +40,9 @@ const SEAMS: readonly Seam[] = [
   { attribute: 'data-dsh-inputbar', selector: ':has(> [data-composer-card])' },
   // Composer attach "+" button.
   { attribute: 'data-dsh-add', selector: '[data-composer-card] [class*="add"]' },
-  // Session stats line under the composer (composer.dock slot).
-  { attribute: 'data-dsh-stats', selector: '[data-slot="conversation.composer.dock"] [class*="root"]' },
+  // Only the native stats line owns this seam. Other dock plugins also use
+  // "root" classes (for example the cost meter), and must not get its band.
+  { attribute: 'data-dsh-stats', selector: '[data-slot="conversation.composer.dock"] [data-composer-stats]' },
   // Spotlight / hover-tilt panes: the floating-glass surfaces the cursor
   // glow and the geometric press target. The inputbar (composer + its
   // docked stats band) is ONE spot so the fused piece tilts and glows
