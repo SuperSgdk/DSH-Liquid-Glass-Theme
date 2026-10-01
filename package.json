@@ -61,7 +61,8 @@
     "build": "node scripts/build.mjs && tsc -p tsconfig.build.json",
     "bundle": "pnpm run build",
     "test": "node --test tests/*.test.mjs",
-    "check": "pnpm run typecheck && pnpm run build && pnpm test"
+    "check": "pnpm run typecheck && pnpm run build && pnpm test",
+    "sync": "node scripts/sync.mjs"
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "^4.0.2",

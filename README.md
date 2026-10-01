@@ -79,6 +79,20 @@ pnpm run check
 
 问题和新 PR 请提交到本仓库。兼容修复应写明 DSH 版本、复现步骤和验证结果；不同修复存在重叠时逐项取舍。
 
+### 本地修复自动同步
+
+本仓库已启用维护规则：**修复 → `pnpm run check` 通过 → 用户确认实际效果正常 → 维护者自动提交并推送 GitHub**。用户确认后无需再单独要求更新仓库，具体规则见 [AGENTS.md](AGENTS.md)。这由维护者收到确认后调用脚本执行，不是后台文件监视或定时任务。
+
+审阅本次差异后，明确列出需要提交的文件（包含检查生成的构建产物）：
+
+```powershell
+pnpm run sync -- --confirmed --message "fix: describe the confirmed repair" --files src/client/example.ts lib/client.js lib/client.js.map
+```
+
+将示例路径替换为本次实际文件。脚本重新运行检查，只提交列出的修改，并核实 GitHub main 已包含该提交。已有暂存内容、未列出的改动、远端版本变化或检查失败时会停止；推送异常时保留本地提交并先核实远端，不盲目重试或强推。维护脚本和文档修改按用户对维护工作的授权同步。
+
+普通推送触发 Check；新安装包仍由匹配包版本的 `v*` 标签触发 Release。本同步脚本不创建标签，不提升插件版本。云端检查结果需另行核实。
+
 - [已有社区 PR 的评审结果](docs/PR_REVIEW.md)
 - [验证记录](docs/VALIDATION.md)
 - [更新日志](CHANGELOG.md)
