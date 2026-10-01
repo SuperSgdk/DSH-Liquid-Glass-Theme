@@ -1,0 +1,26 @@
+DSH液态玻璃皮肤插件 / DSH Liquid Glass Theme
+Maintained by SuperSgdk. Independent project, first maintenance release 2026-10-01.
+
+This project contains code and assets originally published as Aqua /
+DSH-Transparent-UI-Plugin by John Wu (WYH66666666), copyright 2026.
+The inherited Git history and existing copyright notices are preserved.
+The LICENSE at the inherited main commit is GNU AGPL version 3.
+This maintained version is distributed under AGPL-3.0-only.
+The embedded Space Grotesk font is licensed separately under SIL OFL 1.1;
+its copyright notice and full license are in licenses/SpaceGrotesk-OFL.txt.
+The Host bundle includes @deepseek-ai/schemastery and @deepseek-ai/cosmokit;
+their MIT copyright notices and licenses are also preserved in licenses/.
+
+Reviewed community contributions incorporated in this release:
+- vikna919: Runtime-to-Store migration and keyed settings registration (PR #24);
+  native right sidebar material rules (final CSS from PR #25).
+- Cyber-Yu-Git: hidden fluid canvas safeguards (PR #5).
+- nianchen8: narrow viewport input, stats and sidebar layout fixes (PR #8).
+- ningmengxr / Renakoni: Host namespace discovery proposals (PR #26 / #18);
+  implemented against the actual DSH 0.1.5-rc.1 settings service.
+
+Changes by SuperSgdk on 2026-10-01 include package identity, standalone build,
+current Host namespace registration, installer safety, validation and docs.
+Historical package metadata said MIT, while main's LICENSE was subsequently
+changed to AGPL. This release follows the inherited main LICENSE and corrects
+the inconsistent package metadata.

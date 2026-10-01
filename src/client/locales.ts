@@ -5,7 +5,7 @@ export const NS = 'settings.aqua'
 
 /** Simplified Chinese dictionary (the key-set source of truth). */
 export const zh = {
-  'aqua.title': '玻璃主题',
+  'aqua.title': 'DSH液态玻璃皮肤插件',
   'aqua.description': '全局玻璃质感，云母/兼容双模式，模糊度、磨砂度、背景与颜色都可自由调节',
   'aqua.enable': '开启',
   'aqua.disable': '关闭',

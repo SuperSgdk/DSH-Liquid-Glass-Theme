@@ -1,10 +1,17 @@
 /**
- * Aqua theme-layer plugin, node half. Pure UI plugin: the empty apply exists
- * so the plugin appears in the host cordis.yml / Loader; the browser half
- * ships via exports["./client"], discovered through the package.json
- * dsh.client declaration. The enable flag is a browser-local preference
- * (localStorage) — a client-only visual layer owns no host configuration.
+ * Host registration for the liquid glass settings card.
+ * Modified by SuperSgdk on 2026-10-01. The visual preferences remain in
+ * browser storage; the empty Host schema makes the card discoverable.
  */
+import type { Context } from '@deepseek-ai/cordis'
+import type {} from '@deepseek-ai/dsh-settings'
+import z from '@deepseek-ai/schemastery'
+import { AQUA_SETTINGS_NAMESPACE } from './settings-namespace.ts'
 
-/** Host plugin body — no host-side behavior for this surface plugin. */
-export function apply(): void {}
+export function apply(ctx: Context): void {
+  ctx.inject(['settings'], (settingsCtx) => {
+    settingsCtx.settings.register(AQUA_SETTINGS_NAMESPACE, z.object({}))
+  })
+}
+
+export { AQUA_SETTINGS_NAMESPACE }
