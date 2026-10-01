@@ -47,7 +47,7 @@ if ($Source -match '^https?://github\.com/([^/]+/[^/]+?)(?:\.git)?/?$') {
 
 $packageFile = Join-Path $src 'package.json'
 if (-not (Test-Path -LiteralPath $packageFile)) { throw 'Source has no package.json.' }
-$package = Get-Content -LiteralPath $packageFile -Raw | ConvertFrom-Json
+$package = Get-Content -LiteralPath $packageFile -Raw -Encoding UTF8 | ConvertFrom-Json
 if ($package.name -ne $plugin) { throw "Unexpected package name: $($package.name)" }
 foreach ($file in @('lib\client.js', 'lib\index.js', 'LICENSE', 'NOTICE')) {
     if (-not (Test-Path -LiteralPath (Join-Path $src $file))) { throw "Source is missing $file. Build it first." }
@@ -68,7 +68,7 @@ $oldTarget = if ($currentLink) { [string](@($currentLink.Target)[0]) } else { ''
     ConvertTo-Json | Set-Content -LiteralPath (Join-Path $backupDir 'link.json') -Encoding UTF8
 Write-Host "Backup: $backupDir"
 
-$patch = if (Test-Path -LiteralPath $patchFile) { Get-Content -LiteralPath $patchFile -Raw } else { '' }
+$patch = if (Test-Path -LiteralPath $patchFile) { Get-Content -LiteralPath $patchFile -Raw -Encoding UTF8 } else { '' }
 if ($null -eq $patch) { $patch = '' }
 # DSH's initial empty array may follow header comments. Remove that array
 # before writing list entries, while keeping every comment.
@@ -82,7 +82,7 @@ if ($patch -notmatch $registeredPattern) {
     $entry = "- insert:`n    - id: liquid-glass-theme`n      name: '$plugin'`n"
     $patch = if ($base) { $base + "`n`n" + $entry } else { $entry }
 }
-$manifest = if (Test-Path -LiteralPath $manifestFile) { Get-Content -LiteralPath $manifestFile -Raw | ConvertFrom-Json } else {
+$manifest = if (Test-Path -LiteralPath $manifestFile) { Get-Content -LiteralPath $manifestFile -Raw -Encoding UTF8 | ConvertFrom-Json } else {
     [pscustomobject]@{ name = "dsh-profile-$Profile"; private = $true }
 }
 if (-not $manifest.dependencies) { $manifest | Add-Member -NotePropertyName dependencies -NotePropertyValue ([pscustomobject]@{}) -Force }
