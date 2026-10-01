@@ -6,7 +6,7 @@ export const NS = 'settings.aqua'
 /** Simplified Chinese dictionary (the key-set source of truth). */
 export const zh = {
   'aqua.title': 'DSH液态玻璃皮肤插件',
-  'aqua.description': '全局玻璃质感，云母/兼容双模式，模糊度、磨砂度、背景与颜色都可自由调节',
+  'aqua.description': '由 SuperSgdk 维护并完成 Windows 桌面端适配。支持云母/兼容双模式，可调模糊度、磨砂度、背景与颜色',
   'aqua.enable': '开启',
   'aqua.disable': '关闭',
   'aqua.mode': '模式',
@@ -53,8 +53,8 @@ declare module '@deepseek-ai/dsh-client-ui-slots' {
 
 /** English dictionary. */
 export const en = {
-  'aqua.title': 'Glass theme',
-  'aqua.description': 'Global glassmorphism with mica/compatibility modes — blur, frost, backdrop, and color all adjustable',
+  'aqua.title': 'DSH Liquid Glass Theme',
+  'aqua.description': 'Maintained by SuperSgdk, with Windows desktop adaptation. Mica and compatibility modes with adjustable blur, frost, backdrop, and color',
   'aqua.enable': 'On',
   'aqua.disable': 'Off',
   'aqua.mode': 'Mode',

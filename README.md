@@ -1,6 +1,6 @@
 # DSH液态玻璃皮肤插件
 
-由 **SuperSgdk** 独立维护的 DSH 界面主题。让顶栏、侧边栏、输入区和统计栏使用可调的玻璃材质，支持流体背景、图片/视频壁纸及明暗主题。
+由 **SuperSgdk** 独立维护并完成 Windows 桌面端适配的 DSH 界面主题。让顶栏、侧边栏、输入区和统计栏使用可调的玻璃材质，支持流体背景、图片/视频壁纸及明暗主题。
 
 **v1.4.2 起已支持 DSH 桌面版。** 已在 Windows DSH `0.2.0-rc.2` 完成适配，修复主对话区背景、侧栏收起后无法展开、中间竖线和输入区占用过高的问题，见 [桌面版说明](docs/DESKTOP.md)。
 
@@ -56,7 +56,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install-liquid-glass.ps1 -
 
 ## 本地开发
 
-需要 Node.js 22 或更新版本及 pnpm 11.19.0。构建在本仓库内完成，不需要 DSH 源码工作区或原作者的磁盘路径。
+需要 Node.js 22 或更新版本及 pnpm 11.19.0。构建在本仓库内完成。
 
 ```powershell
 pnpm install --frozen-lockfile
@@ -79,7 +79,7 @@ Windows PowerShell 中也使用上述命令完成依赖安装、检查和构建�
 
 ## 维护与贡献
 
-问题和新 PR 请提交到本仓库。兼容修复应写明 DSH 版本、复现步骤和验证结果；不同修复存在重叠时逐项取舍。
+当前维护者为 **SuperSgdk**。问题和新 PR 请提交到本仓库。兼容修复应写明 DSH 版本、复现步骤和验证结果；新贡献在采纳后记入贡献记录。
 
 ### 本地修复自动同步
 
@@ -95,10 +95,9 @@ pnpm run sync -- --confirmed --message "fix: describe the confirmed repair" --fi
 
 普通推送触发 Check；新安装包仍由匹配包版本的 `v*` 标签触发 Release。本同步脚本不创建标签，不提升插件版本。云端检查结果需另行核实。
 
-- [已有社区 PR 的评审结果](docs/PR_REVIEW.md)
 - [验证记录](docs/VALIDATION.md)
 - [更新日志](CHANGELOG.md)
 
-## 许可证与贡献记录
+## 许可证与来源说明
 
-本项目代码以 **AGPL-3.0-only** 分发，保留 [LICENSE](LICENSE) 全文。内嵌 Space Grotesk 字体遵循 [SIL OFL 1.1](licenses/SpaceGrotesk-OFL.txt)。继承代码、资源的作者及社区贡献记录见 [NOTICE](NOTICE)，原有提交历史保留。项目维护、安装与版本发布入口均为本仓库。
+本项目代码以 **AGPL-3.0-only** 分发，保留 [LICENSE](LICENSE) 全文。内嵌 Space Grotesk 字体遵循 [SIL OFL 1.1](licenses/SpaceGrotesk-OFL.txt)。版权来源与历史贡献记录见 [NOTICE](NOTICE)。项目维护、安装与版本发布入口均为本仓库。

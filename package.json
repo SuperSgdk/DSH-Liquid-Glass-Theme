@@ -5,14 +5,6 @@
   "type": "module",
   "license": "AGPL-3.0-only",
   "author": "SuperSgdk",
-  "contributors": [
-    "John Wu",
-    "vikna919",
-    "Cyber-Yu-Git",
-    "nianchen8",
-    "ningmengxr",
-    "Renakoni"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SuperSgdk/DSH-Liquid-Glass-Theme.git"

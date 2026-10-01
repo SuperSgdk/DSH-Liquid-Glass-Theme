@@ -1,5 +1,6 @@
 DSH液态玻璃皮肤插件 / DSH Liquid Glass Theme
-Maintained by SuperSgdk. Independent project, first maintenance release 2026-10-01.
+Independently maintained by SuperSgdk, who completed the Windows desktop
+adaptation. First maintenance release 2026-10-01.
 
 This project contains code and assets originally published as Aqua /
 DSH-Transparent-UI-Plugin by John Wu (WYH66666666), copyright 2026.
@@ -19,8 +20,11 @@ Reviewed community contributions incorporated in this release:
 - ningmengxr / Renakoni: Host namespace discovery proposals (PR #26 / #18);
   implemented against the actual DSH 0.1.5-rc.1 settings service.
 
+Detailed historical review decisions and source commits: docs/PR_REVIEW.md.
+
 Changes by SuperSgdk on 2026-10-01 include package identity, standalone build,
-current Host namespace registration, installer safety, validation and docs.
+current Host namespace registration, installer safety, validation and docs,
+and Windows desktop compatibility and layout fixes.
 Historical package metadata said MIT, while main's LICENSE was subsequently
 changed to AGPL. This release follows the inherited main LICENSE and corrects
 the inconsistent package metadata.

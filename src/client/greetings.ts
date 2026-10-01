@@ -6,7 +6,7 @@
 
 /** Stable hero texts the stock UI shows without the Aqua layer. */
 const BASE_GREETING = {
-  zh: '你好，John Wu，今天有什么任务？',
+  zh: '你好，今天有什么任务？',
   en: 'Into the Unknown',
 }
 
@@ -25,36 +25,36 @@ const AQUA_PLACEHOLDER = {
 const ZH_GREETINGS: readonly (readonly string[])[] = [
   // morning (5–11)
   [
-    '早，John Wu。今天从哪里开始？',
-    '早上好，John Wu。先把最难的任务交给我。',
-    '新的一天，John Wu。今天有什么任务？',
+    '早上好。今天从哪里开始？',
+    '早上好。先把最难的任务交给我。',
+    '新的一天。今天有什么任务？',
   ],
   // day (11–17)
   [
-    '你好，John Wu，今天有什么任务？',
-    'John Wu，欢迎回来。今天想做什么？',
-    '嗨，John Wu。今天要探索哪里？',
+    '你好，今天有什么任务？',
+    '欢迎回来。今天想做什么？',
+    '嗨，今天要探索哪里？',
   ],
   // evening (17–23)
   [
-    '晚上好，John Wu。收尾还是继续？',
-    'John Wu，晚上好。还有什么没做完？',
-    '傍晚好，John Wu。今天进展如何？',
+    '晚上好。收尾还是继续？',
+    '晚上好。还有什么没做完？',
+    '傍晚好。今天进展如何？',
   ],
   // night (23–5)
   [
-    '夜深了，John Wu。还在忙什么？',
-    'John Wu，夜里灵感来了吗？',
-    '这么晚还在，John Wu。要我做点什么？',
+    '夜深了。还在忙什么？',
+    '夜里灵感来了吗？',
+    '这么晚还在。要我做点什么？',
   ],
 ]
 
 /** English greeting pool (same bucket shape; smaller, all-day flavored). */
 const EN_GREETINGS: readonly (readonly string[])[] = [
-  ['Morning, John Wu. Where do we start today?'],
-  ['Hey John Wu, what are we working on today?', 'Welcome back, John Wu. What shall we build?'],
-  ['Good evening, John Wu. Wrapping up or pressing on?'],
-  ['Late night, John Wu. What are we still chasing?'],
+  ['Good morning. Where do we start today?'],
+  ['Hey, what are we working on today?', 'Welcome back. What shall we build?'],
+  ['Good evening. Wrapping up or pressing on?'],
+  ['Late night. What are we still chasing?'],
 ]
 
 /** Last picked index per locale so consecutive mounts avoid an immediate repeat. */
