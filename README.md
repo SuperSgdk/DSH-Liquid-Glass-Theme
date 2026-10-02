@@ -75,6 +75,8 @@ Windows PowerShell 中也使用上述命令完成依赖安装、检查和构建�
 .\install.ps1 -Source $PWD.Path -DshHome '<测试 DSH_HOME>' -Profile '<测试 profile>'
 ```
 
+`-Source` 使用本地目录时会建立链接，不会复制源码。安装后请保留该目录；移动路径后，需要用新路径重新运行安装。
+
 浏览器检查需单独启动测试 profile，将带启动 token 的测试 URL 放入当前终端的 `DSH_TEST_URL` 环境变量，再运行 `node scripts/browser-smoke.mjs`。测试 URL 和 token 不应写入提交。使用已有 Chrome 时设置 `BROWSER_CHANNEL=chrome`，否则按 Playwright 的说明安装测试浏览器。
 
 ## 维护与贡献
