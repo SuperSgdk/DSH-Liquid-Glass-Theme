@@ -11,7 +11,7 @@ Invoke-WebRequest 'https://raw.githubusercontent.com/SuperSgdk/DSH-Liquid-Glass-
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install-liquid-glass.ps1 -Version v1.4.2 -Profile desktop
 ```
 
-省略 `-Version` 会安装最新 GitHub Release。默认 DSH_HOME 为用户目录下的 `.dsh`；自定义目录可使用 `-DshHome`。
+省略 `-Version` 会安装最新 GitHub Release。安装目录优先使用显式传入的 `-DshHome`；未传入时读取 `DSH_HOME` 环境变量，该变量为空时才使用用户目录下的 `.dsh`。
 
 安装器只处理指定 profile 的插件注册和链接，先备份配置与原链接信息。安装后重新打开桌面版，在 **设置 → 通用设置** 的外观附近找到主题开关；模糊、磨砂、背景及壁纸控件仍在外观下方。关闭主题可恢复原生界面。
 
